@@ -5,7 +5,7 @@ import Login from '../containers/Login';
 import Register from '../containers/Register';
 import NotFound from '../containers/NotFound';
 import Layout from '../components/Layout';
-//Have un return explicito por eso pone los ()
+//Hace un return explicito por eso pone los ()
 const App = () => (
   <BrowserRouter>
     <Layout>
