@@ -6,19 +6,23 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode production",
-    "start": "json-server initialState.json & webpack-dev-server --open --mode development"
+    "start": "json-server initialState.json & webpack-dev-server --open --mode development",
+    "start:dev": "node src/server/index"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/register": "^7.13.14",
     "babel-eslint": "^10.0.2",
     "classnames": "^2.2.6",
+    "dotenv": "^8.2.0",
     "eslint": "^6.0.1",
     "eslint-config-airbnb": "^17.1.1",
     "eslint-plugin-import": "^2.18.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.14.2",
+    "express": "^4.17.1",
     "json-server": "^0.16.3",
     "md5": "^2.2.1",
     "prop-types": "^15.7.2",
