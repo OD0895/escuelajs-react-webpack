@@ -24,6 +24,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.14.2",
     "express": "^4.17.1",
+    "helmet": "^4.5.0",
     "history": "^4.10.1",
     "ignore-styles": "^5.0.1",
     "json-server": "^0.16.3",

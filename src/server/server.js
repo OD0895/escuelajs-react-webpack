@@ -1,6 +1,7 @@
 import express from 'express';
 import config from './config';
 import webpack from 'webpack';
+import helmet from 'helmet';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
@@ -26,6 +27,11 @@ if (env === 'development') {
 
   app.use(webpackDevMiddleware(compiler, serverConfig));
   app.use(webPackHotMiddleware(compiler));
+}else{
+  app.use(express.static(`${__dirname}/public`));
+  app.use(helmet());
+  app.use(helmet.permittedCrossDomainPolicies({ permittedPolicies: 'none' }));
+  app.disable('x-powered-by');
 }
 
 const setResponse = (html, preloadedState) => {
