@@ -19,7 +19,7 @@ const app = express();
 if (env === 'development') {
   console.log('Development config');
   // eslint-disable-next-line global-require
-  const webpackConfig = require('../../webpack.config');
+  const webpackConfig = require('../../webpack.config.dev');
   const webpackDevMiddleware = require('webpack-dev-middleware');
   const webPackHotMiddleware = require('webpack-hot-middleware');
   const compiler = webpack(webpackConfig);
@@ -29,9 +29,12 @@ if (env === 'development') {
   app.use(webPackHotMiddleware(compiler));
 }else{
   app.use(express.static(`${__dirname}/public`));
-  app.use(helmet());
-  app.use(helmet.permittedCrossDomainPolicies({ permittedPolicies: 'none' }));
+ // app.use(helmet());
+  app.use(helmet({contentSecurityPolicy: false,}), );
+  //app.use(helmet.permittedCrossDomainPolicies());
   app.disable('x-powered-by');
+  //app.use(helmet.permittedCrossDomainPolicies({ permittedPolicies: 'none' }));
+  //app.disable('x-powered-by');
 }
 
 const setResponse = (html, preloadedState) => {

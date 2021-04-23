@@ -3,8 +3,8 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  entry: ['./src/frontend/index.js'],
-  mode: 'production',
+  entry: ['./src/frontend/index.js', 'webpack-hot-middleware/client?path=/__webpack_hmt&timeout=2000&reload=true'],
+  mode: 'development',
   output: {
     path: path.resolve(__dirname, 'src/server/public'),
     filename: 'assets/app.js',
@@ -57,6 +57,7 @@ module.exports = {
     historyApiFallback: true,
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({
       filename: 'assets/app.css'
     }),
