@@ -1,29 +1,28 @@
 import express from 'express';
-import dotenv from 'dotenv';
+import config from './config';
 import webpack from 'webpack';
 import React from 'react';
-import renderToString from 'react-dom/server';
+import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { renderRoutes } from 'react-router-config';
 import { StaticRouter } from 'react-router-dom';
-import { serverRoutes } from '../frontend/routes/serverRoutes';
+import serverRoutes from '../frontend/routes/serverRoutes';
 import reducer from '../frontend/reducers';
 import initialState from '../frontend/initialState';
-dotenv.config();
 
-const { ENV, PORT } = process.env;
+const { env, port } = config;
 
 const app = express();
 
-if (ENV === 'development') {
+if (env === 'development') {
   console.log('Development config');
   // eslint-disable-next-line global-require
   const webpackConfig = require('../../webpack.config');
   const webpackDevMiddleware = require('webpack-dev-middleware');
   const webPackHotMiddleware = require('webpack-hot-middleware');
   const compiler = webpack(webpackConfig);
-  const serverConfig = { port: PORT, hot: true };
+  const serverConfig = { port: port, hot: true };
 
   app.use(webpackDevMiddleware(compiler, serverConfig));
   app.use(webPackHotMiddleware(compiler));
@@ -59,7 +58,7 @@ const renderApp = (req, res) => {
 
 app.get('*', renderApp);
 
-app.listen(PORT, (err) => {
+app.listen(port, (err) => {
   if(err) console.log(err);
-  else console.log(`Server running on port ${PORT}`);
+  else console.log(`Server running on port ${port}`);
 });
