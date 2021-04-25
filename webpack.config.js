@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const TerserPlugin = require("terser-webpack-plugin");
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   entry: ['./src/frontend/index.js'],
@@ -26,7 +27,7 @@ module.exports = {
         vendors: {
           name: 'vendors',
           chunks: 'all',
-          reuseExistingchunk: true,
+          reuseExistingChunk: true,
           priority: 1,
           filename: 'assets/app-[hash].js',
           enforce: true,
@@ -78,5 +79,8 @@ module.exports = {
       filename: 'assets/app-[hash].css',
     }),
     new WebpackManifestPlugin(),
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: path.resolve(__dirname, 'src/server/public'),
+    }),
   ],
 };
