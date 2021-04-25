@@ -19,6 +19,20 @@ module.exports = {
   optimization: {
     minimize: true,
     minimizer: [new TerserPlugin()],
+    splitChunks: {
+      chunks: 'async',
+      name: true,
+      cacheGroups: {
+        vendors: {
+          name: 'vendors',
+          chunks: 'all',
+          reuseExistingchunk: true,
+          priority: 1,
+          filename: 'assets/app-[hash].js',
+          enforce: true,
+        },
+      },
+    },
   },
   module: {
     rules: [
